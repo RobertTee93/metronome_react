@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MetronomeSlider from "../components/MetronomeSlider"
 
 class MetronomeContainer extends Component {
   constructor(props){
@@ -7,10 +8,20 @@ class MetronomeContainer extends Component {
       playing: false,
       range: 100
     }
+    this.handleRangeChange = this.handleRangeChange.bind(this)
   }
+
+  handleRangeChange(range){
+    const newRange = parseInt(range)
+    this.setState({ range: newRange })
+  }
+  
   render(){
     return (
-      <h1>I am Metronome</h1>
+      <div className="metronome">
+        <h1>I am Metronome</h1>
+        <MetronomeSlider range={ this.state.range } rangeChange={ this.handleRangeChange }></MetronomeSlider>
+      </div>
     )
   }
 }
