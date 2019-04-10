@@ -12,7 +12,7 @@ const MetronomeSlider = (props) => {
       <h1>I am Slider</h1>
       <div>
         <input onInput={ handleChange } type="range" min="40" max="160" defaultValue={ props.range }/>
-        <label htmlFor="volume">Range</label>
+        <label htmlFor="volume">{ props.range } BPM </label>
       </div>
     </div>
   )
