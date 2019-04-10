@@ -5,8 +5,8 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>App</h1>
+      <div>
+        <h1>Metronome</h1>
         <MetronomeContainer></MetronomeContainer>
       </div>
     );

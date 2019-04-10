@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MetronomeSlider from "../components/MetronomeSlider"
+import Metronome from "../components/Metronome"
 import beep from "../functions/Beep.js"
+import "./MetronomeContainer.css"
 
 class MetronomeContainer extends Component {
   constructor(props){
@@ -29,12 +31,16 @@ class MetronomeContainer extends Component {
         window.clearInterval(this.state.intervalId)
       }
       const interval = window.setInterval(this.beep, 1000*60/this.state.range)
+      const el = document.querySelector(".m-container .m-stick")
+      el.style.cssText += `animation: metronome ${120/this.state.range}s ease-in-out infinite;`
       this.setState({ playing: true, intervalId: interval })
     }
 
   stop(){
     if (this.state.playing && this.state.playing){
       window.clearInterval(this.state.intervalId)
+      const el = document.querySelector(".m-container .m-stick")
+      el.style.cssText += `animation: metronome ${0}s ease-in-out infinite;`
       this.setState( { playing: false } )
     }
   }
@@ -45,11 +51,18 @@ class MetronomeContainer extends Component {
 
   render(){
     return (
-      <div className="metronome">
-        <h1>I am Metronome</h1>
-        <button onClick={ this.playSound }>Play</button>
-        <button onClick={ this.stop }>Stop</button>
+      <div className="metronome-container">
+        <Metronome></Metronome>
+        <div className="controls">
+          <div onClick={ this.playSound }>
+            <img src="https://www.pngrepo.com/png/157836/170/play-button.png" alt="play"/>
+          </div>
+          <div onClick={ this.stop }>
+            <img src="https://www.pinclipart.com/picdir/big/31-315907_red-stop-button-plain-icon-svg-clip-arts.png" alt="stop"/>
+          </div>
+        </div>
         <MetronomeSlider range={ this.state.range } rangeChange={ this.handleRangeChange }></MetronomeSlider>
+
       </div>
     )
   }
