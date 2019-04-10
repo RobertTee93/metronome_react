@@ -22,7 +22,12 @@ class MetronomeContainer extends Component {
   handleRangeChange(range){
     const newRange = parseInt(range)
     this.setState({ range: newRange })
-    this.playSound()
+    if (this.state.playing){
+      this.stop()
+      this.playSound()
+    } else {
+      this.playSound()
+    }
   }
 
 
@@ -30,9 +35,9 @@ class MetronomeContainer extends Component {
       if(this.state.intervalId){
         window.clearInterval(this.state.intervalId)
       }
-      const interval = window.setInterval(this.beep, 1000*60/this.state.range)
       const el = document.querySelector(".m-container .m-stick")
       el.style.cssText += `animation: metronome ${120/this.state.range}s ease-in-out infinite;`
+      const interval = window.setInterval(this.beep, 1000*60/this.state.range)
       this.setState({ playing: true, intervalId: interval })
     }
 
